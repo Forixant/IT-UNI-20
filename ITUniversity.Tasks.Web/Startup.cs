@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -19,7 +20,9 @@ namespace ITUniversity.Tasks.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddAutoMapper(typeof(Startup).Assembly);
             services.AddTaskCoreServices();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

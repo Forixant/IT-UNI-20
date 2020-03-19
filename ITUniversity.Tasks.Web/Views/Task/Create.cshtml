@@ -1,27 +1,31 @@
-﻿@using ITUniversity.Tasks.Entities
+﻿@using ITUniversity.Tasks.Web.Models
 
-@model TaskBase
-
-@{
-    ViewData["title"] = "Создать задачу";
-}
+@model TaskCreateModel
 
 <div class="card">
+    <div class="card-header">
+        Создание задачи
+    </div>
     <div class="card-body">
         @using (Html.BeginForm("Create", "Task"))
         {
             <div class="form-group">
-                 <input type="hidden" value="@Model.Subject" name="Subject" />
-                 <p>Введите тему :</p>
-                 @Html.TextBox("Subject", "Введите тему")
+                @Html.LabelFor(model => model.Subject)
+                @Html.TextBoxFor(model => model.Subject, string.Empty, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Subject)
             </div>
             <div class="form-group">
-                <input type="hidden" value="@Model.Descr" name="Descr" />
-                <p>Введите описание :</p>
-                @Html.TextBox("Descr", "Введите описание")
+                @Html.LabelFor(model => model.Descr)
+                @Html.TextAreaFor(model => model.Descr, new { @class = "form-control" })
             </div>
-            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <button type="submit" class="btn btn-success">Сохранить</button>
             <a class="btn btn-danger" href="@Url.Action("Index", "Task")">Отмена</a>
         }
     </div>
 </div>
+
+@section scripts
+{
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
