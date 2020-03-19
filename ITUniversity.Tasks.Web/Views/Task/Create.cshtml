@@ -1,0 +1,27 @@
+﻿@using ITUniversity.Tasks.Entities
+
+@model TaskBase
+
+@{
+    ViewData["title"] = "Создать задачу";
+}
+
+<div class="card">
+    <div class="card-body">
+        @using (Html.BeginForm("Create", "Task"))
+        {
+            <div class="form-group">
+                 <input type="hidden" value="@Model.Subject" name="Subject" />
+                 <p>Введите тему :</p>
+                 @Html.TextBox("Subject", "Введите тему")
+            </div>
+            <div class="form-group">
+                <input type="hidden" value="@Model.Descr" name="Descr" />
+                <p>Введите описание :</p>
+                @Html.TextBox("Descr", "Введите описание")
+            </div>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <a class="btn btn-danger" href="@Url.Action("Index", "Task")">Отмена</a>
+        }
+    </div>
+</div>
