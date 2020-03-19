@@ -23,7 +23,7 @@ namespace ITUniversity.Tasks.Web.Controllers
 
         public IActionResult Index()
         {
-            var a = taskStore.Save(new TaskBase { Subject = "Hello", Descriptiom = "Hello world!!!" });
+            var a = taskStore.Save(new TaskBase { Subject = "Hello", Descr = "Hello world!!!" });
             return View();
         }
 

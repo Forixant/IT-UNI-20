@@ -33,39 +33,5 @@ namespace ITUniversity.Tasks.Entities
         /// Статус
         /// </summary>
         public TaskStatus Status { get; set; }
-
-        /// <summary>
-        /// Перегрузка проверки на равенство
-        /// </summary>
-        /// <param name="obj1"></param>
-        /// <param name="obj2"></param>
-        /// <returns></returns>
-        public static bool operator ==(TaskBase obj1, TaskBase obj2)
-        {
-            if (obj1.Id == obj2.Id &&
-                obj1.Subject == obj2.Subject &&
-                obj1.Descr == obj2.Descr &&
-                obj1.CreationDate == obj2.CreationDate &&
-                obj1.Status == obj2.Status)
-                return true;
-            return false;
-        }
-
-        /// <summary>
-        /// Обязательная перегрузка проверки на неравенство
-        /// </summary>
-        /// <param name="obj1"></param>
-        /// <param name="obj2"></param>
-        /// <returns></returns>
-        public static bool operator !=(TaskBase obj1, TaskBase obj2)
-        {
-            if (obj1.Id == obj2.Id &&
-                obj1.Subject == obj2.Subject &&
-                obj1.Descr == obj2.Descr &&
-                obj1.CreationDate == obj2.CreationDate &&
-                obj1.Status == obj2.Status)
-                return false;
-            return true;
-        }
     }
 }

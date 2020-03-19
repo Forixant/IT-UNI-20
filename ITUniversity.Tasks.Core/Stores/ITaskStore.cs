@@ -1,4 +1,5 @@
-﻿using ITUniversity.Tasks.Entities;
+﻿using System.Collections.Generic;
+using ITUniversity.Tasks.Entities;
 
 namespace ITUniversity.Tasks.Stores
 {
@@ -33,5 +34,10 @@ namespace ITUniversity.Tasks.Stores
         /// <param name="id"></param>
         /// <returns></returns>
         TaskBase Get(long id);
+
+        /// <summary>
+        /// Получить все
+        /// </summary>
+        ICollection<TaskBase> GetAll();
     }
 }

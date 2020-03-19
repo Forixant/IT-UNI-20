@@ -1,59 +1,80 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using ITUniversity.Tasks.Entities;
+using ITUniversity.Tasks.Helpers;
 
 namespace ITUniversity.Tasks.Stores
 {
+    /// <inheritdoc/>
     public class TaskMemoryStore : ITaskStore
     {
         private List<TaskBase> tasks;
 
         private long counter;
 
+        /// <summary>
+        /// Инициализировать экземпляр <see cref="TaskMemoryStore"/>
+        /// </summary>
         public TaskMemoryStore()
         {
-            this.tasks = new List<TaskBase>();
+            counter = 1;
+            tasks = new List<TaskBase>();
         }
 
-        public void Delete(long id)
-        {
-            //удаление элемента по id из list
-            tasks.Remove(tasks.FirstOrDefault(item => item.Id == id));
-        }
-
-        public TaskBase Get(long id)
-        {
-            //получение элемента по id из list
-            return tasks.FirstOrDefault(item => item.Id == id);
-        }
-
+        /// <inheritdoc/>
         public TaskBase Save(TaskBase task)
         {
-            var saved = tasks.FirstOrDefault(item => item == task);
+            var saved = tasks.FirstOrDefault(item => item.CustomEquals(task));
             if (saved != null)
             {
-                return saved;
+                task.Id = saved.Id;
+                return saved.Copy();
             }
             task.Id = counter++;
-            tasks.Add(task);
+            tasks.Add(task.Copy());
             return task;
         }
 
-        public TaskBase Update(TaskBase entity)
+        /// <inheritdoc/>
+        public TaskBase Update(TaskBase task)
         {
-            var saved = tasks.FirstOrDefault(item => item == entity);
-            if (saved != null)//если такая задача присутствует
+            var saved = InternalGet(task.Id);
+            if (saved == null)
             {
-                //обновляем поля
-                saved.Subject = entity.Subject;
-                saved.CreationDate = entity.CreationDate;
-                saved.Status = entity.Status;
-                saved.Descr = entity.Descr;
-                //возвращаем изменённую задачу
-                return tasks.FirstOrDefault(item => item == saved);
+                throw new Exception("Задача не найдена");
             }
-            return null;
+            saved.Subject = task.Subject;
+            saved.Descr = task.Descr;
+            saved.CreationDate = task.CreationDate;
+            saved.Status = task.Status;
+
+            return task;
+        }
+
+        /// <inheritdoc/>
+        public TaskBase Get(long id)
+        {
+            var saved = InternalGet(id);
+            return saved?.Copy();
+        }
+
+        /// <inheritdoc/>
+        public ICollection<TaskBase> GetAll()
+        {
+            return tasks.Select(task => task.Copy()).ToList();
+        }
+
+        /// <inheritdoc/>
+        public void Delete(long id)
+        {
+            tasks.RemoveAll(task => task.Id == id);
+        }
+
+        private TaskBase InternalGet(long id)
+        {
+            return tasks.FirstOrDefault(task => task.Id == id);
         }
     }
 }
