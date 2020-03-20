@@ -59,8 +59,12 @@ namespace ITUniversity.Tasks.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(TaskCreateModel task)
+        public IActionResult Update(TaskBase task)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(task);
+            }
             var entity = mapper.Map<TaskBase>(task);
             taskManager.Update(entity);
 
