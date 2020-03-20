@@ -3,7 +3,7 @@
 using ITUniversity.Tasks.Enums;
 
 namespace ITUniversity.Tasks.Entities
-                                {
+{
     /// <summary>
     /// Базовый класс задач
     /// </summary>
@@ -22,7 +22,7 @@ namespace ITUniversity.Tasks.Entities
         /// <summary>
         /// Описание
         /// </summary>
-        public string Descr { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
         /// Дата создания

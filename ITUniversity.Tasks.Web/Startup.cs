@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,8 +19,17 @@ namespace ITUniversity.Tasks.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.AddTaskCoreServices();
+            services
+                .AddControllersWithViews()
+                .AddRazorRuntimeCompilation() //Для изменения cshtml в запущенном приложении
+                ;
+
+            services
+                .AddAutoMapper(typeof(Startup).Assembly);
+
+            services
+                .AddTaskCoreServices() //Регистрация сервесов Core
+                ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -4,40 +4,37 @@ using ITUniversity.Tasks.Entities;
 namespace ITUniversity.Tasks.Stores
 {
     /// <summary>
-    /// 
+    /// Хранилище для сущности <see cref="TaskBase"/>
     /// </summary>
     public interface ITaskStore
     {
         /// <summary>
-        /// Добавление задачи
+        /// Сохранить
         /// </summary>
-        /// <param name="task"></param>
-        /// <returns></returns>
+        /// <param name="task">Задача</param>
         TaskBase Save(TaskBase task);
 
         /// <summary>
-        /// Обновление задачи
+        /// Обновить
         /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        TaskBase Update(TaskBase entity);
+        /// <param name="task">Задача</param>
+        TaskBase Update(TaskBase task);
 
         /// <summary>
-        /// Удаление задачи
+        /// Получить
         /// </summary>
-        /// <param name="id"></param>
-        void Delete(long id);
-
-        /// <summary>
-        /// Получение задачи по id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Идентификатор</param>
         TaskBase Get(long id);
 
         /// <summary>
         /// Получить все
         /// </summary>
         ICollection<TaskBase> GetAll();
+
+        /// <summary>
+        /// Удалить
+        /// </summary>
+        /// <param name="id">Идентификатор</param>
+        void Delete(long id);
     }
 }
