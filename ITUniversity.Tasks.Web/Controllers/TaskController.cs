@@ -53,29 +53,29 @@ namespace ITUniversity.Tasks.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Update(long id)
+        public IActionResult Details(long id)
         {
-            return View(taskManager.Get(id));
+            var task = taskManager.Get(id);
+
+            return View(task);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(long id)
+        {
+            var task = taskManager.Get(id);
+            var model = mapper.Map<TaskEditModel>(task);
+
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult Update(TaskBase task)
+        public IActionResult Edit(TaskEditModel task)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(task);
-            }
             var entity = mapper.Map<TaskBase>(task);
             taskManager.Update(entity);
 
             return RedirectToAction("Index");
-        }
-
-        [HttpGet]
-        public IActionResult Details(long id)
-        {
-            var task = taskManager.Get(id);
-            return View(task);
         }
     }
 }

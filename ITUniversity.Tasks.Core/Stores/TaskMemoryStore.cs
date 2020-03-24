@@ -45,9 +45,9 @@ namespace ITUniversity.Tasks.Stores
             {
                 throw new Exception("Задача не найдена");
             }
-           // saved.Subject = task.Subject;
+            saved.Subject = task.Subject;
             saved.Description = task.Description;
-           // saved.CreationDate = task.CreationDate;
+            //saved.CreationDate = task.CreationDate;
             saved.Status = task.Status;
 
             return task;

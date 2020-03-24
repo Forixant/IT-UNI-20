@@ -37,11 +37,15 @@ namespace ITUniversity.Tasks.Managers
         ICollection<TaskBase> GetAll();
 
         /// <summary>
+        /// Обновить
+        /// </summary>
+        /// <param name="task">Задача</param>
+        TaskBase Update(TaskBase task);
+
+        /// <summary>
         /// Удалить
         /// </summary>
         /// <param name="id">Идентификатор</param>
         void Delete(long id);
-
-        TaskBase Update(TaskBase task);
     }
 }

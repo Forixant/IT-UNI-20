@@ -1,5 +1,7 @@
 using AutoMapper;
+
 using ITUniversity.AspNetCore;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,11 +26,11 @@ namespace ITUniversity.Tasks.Web
                 .AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
                 {
-                     // Use the default property (Pascal) casing
-                     //options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                    // Use the default property (Pascal) casing
+                    //options.SerializerSettings.ContractResolver = new DefaultContractResolver();
 
-                     // Configure a custom converter
-                     //options.SerializerOptions.Converters.Add(new MyCustomJsonConverter());
+                    // Configure a custom converter
+                    //options.SerializerOptions.Converters.Add(new MyCustomJsonConverter());
                 })
                 .AddRazorRuntimeCompilation() //Для изменения cshtml в запущенном приложении
                 ;
@@ -37,9 +39,10 @@ namespace ITUniversity.Tasks.Web
                 .AddAutoMapper(typeof(Startup).Assembly);
 
             services
-                .AddTaskCoreServices() //регистрация сервисов core
-                .AddTaskApplicationServices() //регистрация сервисов api
-    ;
+                .AddTaskCore() //Регистрация сервесов Core
+                .AddTaskApplication() //Регистрация сервисов API
+                .AddTaskNHibernate(Configuration.GetConnectionString("Default"))
+                ; 
 
             services
                 .AddCore();
