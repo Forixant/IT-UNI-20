@@ -28,6 +28,7 @@ namespace ITUniversity.Tasks.Web
         {
             services.CreateControllersForAppServices(typeof(TaskApplicationModule).Assembly);
             services.AddTransient<ITaskAppService, TaskAppService>();
+            services.AddTransient<IUserAppService, UserAppService>();
 
             return services;
         }
@@ -55,6 +56,7 @@ namespace ITUniversity.Tasks.Web
             services.AddSingleton(sessionFactory);
             services.AddScoped(factory => sessionFactory.OpenSession());
             services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }
