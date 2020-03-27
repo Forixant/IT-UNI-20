@@ -60,6 +60,7 @@ namespace ITUniversity.Tasks.API.Services.Imps
                 var role = roleRepository.Get(dto.RoleId.Value);
                 user.Role = role;
             }
+            userRepository.Update(user);
             return mapper.Map<UserDto>(user);
         }
 
