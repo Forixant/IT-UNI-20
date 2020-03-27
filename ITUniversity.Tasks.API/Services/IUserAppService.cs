@@ -1,4 +1,7 @@
-﻿using ITUniversity.Application.Services;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using ITUniversity.Application.Services;
 using ITUniversity.Tasks.API.Services.Dto;
 
 namespace ITUniversity.Tasks.API.Services
@@ -15,6 +18,19 @@ namespace ITUniversity.Tasks.API.Services
         UserDto Create(CreateUserDto dto);
 
         /// <summary>
+        /// Обновить пользователя
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        UserDto Update(UpdateUserDto dto);
+
+        /// <summary>
+        /// Получить пользователя
+        /// </summary>
+        /// <param name="id">Идентификатор пользователя</param>
+        UserDto Get(int id);
+
+        /// <summary>
         /// Получить пользователя
         /// </summary>
         /// <param name="login">Логин</param>
@@ -28,10 +44,30 @@ namespace ITUniversity.Tasks.API.Services
         UserDto Get(string login, string password);
 
         /// <summary>
+        /// Получить список пользователей
+        /// </summary>
+        /// <remarks>
+        /// Только не блокированные пользователи
+        /// </remarks>
+        ICollection<UserDto> GetAll();
+
+        /// <summary>
         /// Проверить пароль
         /// </summary>
         /// <param name="dto"></param>
         /// <param name="password">Пароль</param>
         bool IsValidPassword(UserDto dto, string password);
+
+        /// <summary>
+        /// Заблокировать пользователя
+        /// </summary>
+        /// <param name="id">Иденитификатор пользователя</param>
+        Task<bool> Block(int id);
+
+        /// <summary>
+        /// Свободный логин
+        /// </summary>
+        /// <param name="login">Логин</param>
+        Task<bool> FreeLogin(string login);
     }
 }
